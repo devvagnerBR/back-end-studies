@@ -17,6 +17,7 @@ DESCRIBE professores_labenu;
 
 ALTER TABLE professores_labenu
 ADD COLUMN data_nascimento VARCHAR(255) NOT NULL; -- ADD NOVA COLUNA NA TABELA
+-- não precisa usar o COLUMN
 
 ALTER TABLE professores_labenu
 DROP COLUMN idade; -- REMOVER COLUNA DE IDADE
