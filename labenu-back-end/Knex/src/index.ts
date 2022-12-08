@@ -15,17 +15,12 @@ app.get( "/actor", async ( req: Request, res: Response ): Promise<void> => {
 
     try {
 
-        const result = await connection.raw( `
-        SELECT * FROM Actor;
-
-    `)
-
+        const result = await connection( "Actor" )
         res.status( 200 ).send( { message: result[0] } )
 
     } catch ( error: any ) {
 
         res.status( 500 ).send( error.sqlMessage || error.message )
-
     }
 } )
 
@@ -105,11 +100,16 @@ app.delete( '/actor/:id', async ( req: Request, res: Response ): Promise<void> =
 
 
 const server = app.listen( 3003, () => {
+
     if ( server ) {
+
         const address = server.address() as AddressInfo;
         console.log( `Server is running in http://localhost: ${address.port}` );
+
     } else {
+        
         console.error( `Server is not running in https://localhost` );
+
     }
 } );
 
