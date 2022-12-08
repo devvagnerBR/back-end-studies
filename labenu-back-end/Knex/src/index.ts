@@ -8,7 +8,10 @@ const app = express();
 app.use( express.json() );
 app.use( cors() );
 
-app.post( "/actors", async ( req: Request, res: Response ): Promise<void> => {
+
+// ADD ACTOR
+
+app.post( "/actor", async ( req: Request, res: Response ): Promise<void> => {
 
     try {
         await connection.raw( `
@@ -22,13 +25,40 @@ app.post( "/actors", async ( req: Request, res: Response ): Promise<void> => {
             );
         `)
 
-        res.status(201).send('Ator criado com sucesso')
+        res.status( 201 ).send( 'Ator criado com sucesso' )
 
     } catch ( error: any ) {
         res.status( 500 ).send( error.sqlMessage || error.message )
     }
 
 } )
+
+
+// GET ALL ACTORS
+
+app.get( "/actor", async ( req: Request, res: Response ): Promise<void> => {
+
+    try {
+
+        const result = await connection.raw( `
+        SELECT * FROM Actor;
+
+    `)
+
+        res.status( 200 ).send( { message: result[0] } )
+        
+    } catch ( error: any ) {
+
+        res.status( 500 ).send( error.sqlMessage || error.message )
+
+    }
+} )
+
+
+//
+
+
+
 
 const server = app.listen( 3003, () => {
     if ( server ) {
