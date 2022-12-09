@@ -1,38 +1,23 @@
-import { Request, Response } from "express";
-import { connection } from "../data/connection";
-import { user } from "../types";
+import { Request, Response } from "express" // lembrar de sempre importar o req,res
+import { getAddressInfo } from './../services/getAddressInfo';
 
-export default async function createUser(
-   req: Request,
-   res: Response
-): Promise<void> {
-   try {
+export const createUser = async ( req: Request, res: Response ) => {
 
-      const { name, nickname, email, address } = req.body
+    try {
 
-      if (!name || !nickname || !email || !address) {
-         res.statusCode = 422
-         throw "'name', 'nickname', 'email' e 'address' são obrigatórios"
-      }
+        const { zipcode } = req.body
+        const address = await getAddressInfo( zipcode )
 
-      const id: string = Date.now().toString()
+        if ( !address ) {
+            throw new Error( 'Error on get address!' )
+        }
 
-      const newUser: user = { id, name, nickname, email, address }
+        res.send( address )
 
-      await connection('aula51_users').insert(newUser)
+    } catch ( error: any ) {
 
-      res.status(201).send("Usuário criado!")
+        res.send( { message: 'Unexpected error!' } )
 
-   } catch (error) {
+    }
 
-      if (typeof error === "string") {
-
-         res.send(error)
-      } else {
-         
-         console.log(error.sqlMessage || error.message);
-         res.status(500).send("Ops! Um erro inesperado ocorreu =/")
-      }
-
-   }
 }
