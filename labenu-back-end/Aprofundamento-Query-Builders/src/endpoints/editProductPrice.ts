@@ -41,7 +41,6 @@ export const editProductPrice = async ( req: Request, res: Response ) => {
         // WHERE id = "${id}";`)
 
         await connection( TABLE_PRODUCTS )
-
             .update( {
                 price: price
             } )
