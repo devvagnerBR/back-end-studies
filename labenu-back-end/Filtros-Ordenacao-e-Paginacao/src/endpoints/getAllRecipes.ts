@@ -6,12 +6,17 @@ export async function getAllRecipes(
 
    req: Request,
    res: Response
-   
-): Promise<void> {
+
+): Promise<void> { // a função não precisa retornar nada, ela vai enviar uma resposta somente.
 
    try {
 
-      const result = await connection( "aula49_recipes" )
+      let title = req.query.title as string;
+
+      const result = await
+         connection( "aula49_recipes" )
+            .where( "title", "like", `%${title}%` )
+
       const recipes = result.map( toRecipe )
       res.status( 200 ).send( recipes )
 
