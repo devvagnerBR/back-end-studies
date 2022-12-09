@@ -45,9 +45,10 @@ POST http://localhost:3003/products
 Content-Type: application/json
 
 {
-    "name": "Test product2",
+    "name": "Test product2333",
     "price": 555.99
 }
+
 
 ### Delete product
 DELETE http://localhost:3003/products/1658235667337

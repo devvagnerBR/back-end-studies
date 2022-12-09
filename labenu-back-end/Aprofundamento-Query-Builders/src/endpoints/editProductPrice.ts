@@ -2,33 +2,37 @@ import { Request, Response } from "express";
 import connection from "../database/connection";
 import { TABLE_PRODUCTS } from "../database/tableNames";
 
-export const editProductPrice = async (req: Request, res: Response) => {
+export const editProductPrice = async ( req: Request, res: Response ) => {
+
     let errorCode = 400
+
     try {
+
         const id = req.params.id
         const price = req.body.price
 
-        if (typeof price !== "number") {
+        if ( typeof price !== "number" ) {
             errorCode = 422
-            throw new Error("Parâmetro 'price' deve ser number.")
+            throw new Error( "Parâmetro 'price' deve ser number." )
         }
 
-        if (price <= 0) {
+        if ( price <= 0 ) {
             errorCode = 422
-            throw new Error("Parâmetro 'price' deve ser number maior que 0.")
+            throw new Error( "Parâmetro 'price' deve ser number maior que 0." )
         }
 
         // const [ productExists ] = await connection
         // .raw(`SELECT * FROM ${TABLE_PRODUCTS}
         // WHERE id = "${id}";`)
 
-        const productExists = await connection(TABLE_PRODUCTS)
-            .select()
-            .where("id", "=", `${id}`)
+        const productExists = await connection( TABLE_PRODUCTS )
 
-        if (productExists.length === 0) {
+            .select()
+            .where( "id", "=", `${id}` )
+
+        if ( productExists.length === 0 ) {
             errorCode = 404
-            throw new Error("Produto não encontrado.")
+            throw new Error( "Produto não encontrado." )
         }
 
         // await connection.raw(`
@@ -36,16 +40,20 @@ export const editProductPrice = async (req: Request, res: Response) => {
         // SET price = ${price}
         // WHERE id = "${id}";`)
 
-        await connection(TABLE_PRODUCTS)
-            .update({
+        await connection( TABLE_PRODUCTS )
+
+            .update( {
                 price: price
-            })
-            .where({
+            } )
+            .where( {
                 id: id
-            })
-      
-        res.status(200).send({ message: "Preço do produto editado com sucesso." })
-    } catch (error) {
-        res.status(errorCode).send({ message: error.message })
+            } )
+
+        res.status( 200 ).send( { message: "Preço do produto editado com sucesso." } )
+
+    } catch ( error ) {
+
+        res.status( errorCode ).send( { message: error.message } )
+
     }
 }

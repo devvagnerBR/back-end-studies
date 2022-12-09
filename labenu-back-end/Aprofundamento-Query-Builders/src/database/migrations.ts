@@ -3,7 +3,8 @@ import { products, users } from "./data";
 import { TABLE_PRODUCTS, TABLE_USERS } from "./tableNames";
 
 const createTables = async () => {
-    await connection.raw(`
+
+    await connection.raw( `
             DROP TABLE IF EXISTS ${TABLE_USERS}, ${TABLE_PRODUCTS};
 
             CREATE TABLE IF NOT EXISTS ${TABLE_USERS}(
@@ -19,36 +20,48 @@ const createTables = async () => {
                 price DECIMAL(6,2) NOT NULL
             );
         `)
-        .then(() => {
-            console.log(`Tables ${TABLE_USERS}, ${TABLE_PRODUCTS} created successfully!`);
+        .then( () => {
+
+            console.log( `Tables ${TABLE_USERS}, ${TABLE_PRODUCTS} created successfully!` );
             insertData();
-        })
-        .catch((error: any) => printError(error));
+
+        } )
+        .catch( ( error: any ) => printError( error ) );
 };
 
 const insertData = async () => {
+
     try {
-        await connection(TABLE_USERS)
-            .insert(users)
-            .then(() => console.log(`${TABLE_USERS} populated!`))
-            .catch((error: any) => printError(error));
 
-        await connection(TABLE_PRODUCTS)
-            .insert(products)
-            .then(() => console.log(`${TABLE_PRODUCTS} populated!`))
-            .catch((error: any) => printError(error));
+        await connection( TABLE_USERS )
 
-    } catch (error: any) {
-        console.log(error.sqlMessage || error.message);
+            .insert( users )
+            .then( () => console.log( `${TABLE_USERS} populated!` ) )
+            .catch( ( error: any ) => printError( error ) );
+
+        await connection( TABLE_PRODUCTS )
+
+            .insert( products )
+            .then( () => console.log( `${TABLE_PRODUCTS} populated!` ) )
+            .catch( ( error: any ) => printError( error ) );
+
+    } catch ( error: any ) {
+
+        console.log( error.sqlMessage || error.message );
+
     } finally {
-        console.log("Ending connection!");
 
+        console.log( "Ending connection!" );
         return connection.destroy();
+        
     };
+
 };
 
-const printError = (error: any) => {
-    console.log(error.sqlMessage || error.message);
+const printError = ( error: any ) => {
+
+    console.log( error.sqlMessage || error.message );
+
 };
 
 createTables();
