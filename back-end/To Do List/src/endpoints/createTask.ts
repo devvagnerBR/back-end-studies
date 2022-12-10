@@ -11,7 +11,7 @@ export const createTask = async ( req: Request, res: Response ) => {
     try {
 
         const { title, description, limitDate, creatorUserId } = req.body
-
+        
         const findUser = await connection( TO_DO_USER )
             .select()
             .where( "id", "=", `${creatorUserId}` )

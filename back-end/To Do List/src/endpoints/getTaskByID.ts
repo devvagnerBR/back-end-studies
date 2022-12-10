@@ -13,7 +13,6 @@ export const getTaskById = async ( req: Request, res: Response ) => {
         const result = await connection( TO_DO_TASK )
             .select()
             .where( "creator_user_id", "=", `${id}` )
-
         res.status( 200 ).send( { message: `tasks from id: ${id}`, tasks: result } )
 
     } catch ( error: any ) {

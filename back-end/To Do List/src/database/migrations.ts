@@ -9,6 +9,7 @@ import {
 const createTable = async () => {
 
     await connection.raw( `
+    
         DROP TABLE IF EXISTS ${TO_DO_USER},
                              ${TO_DO_TASK},
                              ${TABLE_TO_DO_RESPONSIBLE_USER_TASK_RELATION};
@@ -36,6 +37,7 @@ const createTable = async () => {
             FOREIGN KEY (task_id) REFERENCES ${TO_DO_TASK}(id),
             FOREIGN KEY (responsible_user_id) REFERENCES ${TO_DO_USER}(id)
         );
+        
     `).then( () => {
 
         console.log( `

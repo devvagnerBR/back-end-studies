@@ -8,6 +8,7 @@ import { getTaskById } from './endpoints/getTaskByID';
 import { getAllUsers } from './endpoints/getAllUsers';
 import { getTaskByCreatorUserID } from './endpoints/getTaskByCreatorUserID';
 import { getUserByNickname } from './endpoints/getUserByNickname';
+import { addUserAsResponsible } from './endpoints/addUserAsResponsible';
 
 
 const app = express();
@@ -36,11 +37,10 @@ app.get( "/users/all", getAllUsers )
 app.get( "/task", getTaskByCreatorUserID )
 
 //get user by nickname
-
 app.get( "/user", getUserByNickname )
 
-
-
+// add User As Responsible
+app.post( "/task/responsible", addUserAsResponsible )
 
 
 app.listen( process.env.PORT || 3003, () => {

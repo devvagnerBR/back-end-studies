@@ -12,10 +12,4 @@
 
 ✅ Get all users
 ✅ Get tasks created by user
-🟥 search for an user
-🟥 
-🟥
-🟥
-🟥
-🟥
-🟥
+✅ search for an user
