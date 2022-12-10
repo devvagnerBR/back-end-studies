@@ -12,10 +12,10 @@ export const getUserById = async ( req: Request, res: Response ) => {
         const { id } = req.params
 
         const result = await connection( TO_DO_USER )
-
             .select()
             .where( "id", "=", `${id}` )
-            
+
+
         res.status( 200 ).send( { user: result } )
 
     } catch ( error: any ) {

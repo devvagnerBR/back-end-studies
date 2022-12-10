@@ -7,6 +7,7 @@ import { createTask } from './endpoints/createTask';
 import { getTaskById } from './endpoints/getTaskByID';
 import { getAllUsers } from './endpoints/getAllUsers';
 import { getTaskByCreatorUserID } from './endpoints/getTaskByCreatorUserID';
+import { getUserByNickname } from './endpoints/getUserByNickname';
 
 
 const app = express();
@@ -33,6 +34,14 @@ app.get( "/users/all", getAllUsers )
 
 // Get tasks created by user
 app.get( "/task", getTaskByCreatorUserID )
+
+//get user by nickname
+
+app.get( "/user", getUserByNickname )
+
+
+
+
 
 app.listen( process.env.PORT || 3003, () => {
     console.log( `Server is running at  ${process.env.PORT || 3003}` );
