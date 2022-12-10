@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { createUser } from './endpoints/createUser';
 import { getUserById } from './endpoints/getUserByID';
+import { editUser } from './endpoints/editUser';
 
 
 const app = express();
@@ -14,8 +15,8 @@ app.post( "/user", createUser )
 // Get User by ID
 app.get( "/user/:id", getUserById )
 
-
-
+// Edit User
+app.put( "/user/:id", editUser )
 
 
 
