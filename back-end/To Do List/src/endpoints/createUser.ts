@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import connection from '../database/connection'
-import { TABLE_TO_DO_LIST_USER } from '../database/tableNames'
+import { TO_DO_USER } from '../database/tableNames'
 import { USER } from '../models/USER'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -21,8 +21,8 @@ export const createUser = async ( req: Request, res: Response ) => {
         }
 
 
-        await connection( TABLE_TO_DO_LIST_USER ).insert( newUser )
-        res.status( 200 ).send( { user: newUser, message: `Usuário criado com sucesso` } )
+        await connection( TO_DO_USER ).insert( newUser )
+        res.status( 200 ).send( { message: `Usuário criado com sucesso`, user: newUser, } )
 
     } catch ( error: any ) {
 

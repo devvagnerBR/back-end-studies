@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import connection from "../database/connection";
-import { TABLE_TO_DO_LIST_USER } from './../database/tableNames';
+import { TO_DO_USER } from './../database/tableNames';
 
 
 export const editUser = async ( req: Request, res: Response ) => {
@@ -13,7 +13,7 @@ export const editUser = async ( req: Request, res: Response ) => {
         const { name, nickname, email } = req.body
 
 
-        const findUser = await connection( TABLE_TO_DO_LIST_USER )
+        const findUser = await connection( TO_DO_USER )
             .select()
             .where( "id", "=", `${id}` )
 
@@ -26,8 +26,8 @@ export const editUser = async ( req: Request, res: Response ) => {
             email: email || findUser[0].email
         }
 
-        await connection( TABLE_TO_DO_LIST_USER )
-        
+        await connection( TO_DO_USER )
+
             .update( updateUser )
             .where( { id: id } )
 

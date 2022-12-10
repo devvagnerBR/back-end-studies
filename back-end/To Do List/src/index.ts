@@ -3,6 +3,8 @@ import cors from 'cors'
 import { createUser } from './endpoints/createUser';
 import { getUserById } from './endpoints/getUserByID';
 import { editUser } from './endpoints/editUser';
+import { createTask } from './endpoints/createTask';
+import { getTaskById } from './endpoints/getTaskByID';
 
 
 const app = express();
@@ -18,7 +20,11 @@ app.get( "/user/:id", getUserById )
 // Edit User
 app.put( "/user/:id", editUser )
 
+// Create Task
+app.post( "/task", createTask )
 
+// Get Task by ID
+app.get( "/task/:id", getTaskById )
 
 
 

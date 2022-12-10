@@ -4,6 +4,6 @@
 
 ✅ Create User
 ✅ Get User by ID
-🟥 Edit User
-🟥 Create Task 
+✅ Edit User
+✅ Create Task 
 🟥 Get Task by ID
