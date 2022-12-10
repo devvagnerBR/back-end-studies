@@ -8,13 +8,13 @@ export const getAddressInfo = async ( zipcode: string ): Promise<Address | null>
     try {
 
         const response = await axios.get( `${baseURL}/${zipcode}/json/` )
-
         const address: Address = {
-            
+
             state: response.data.uf,
             city: response.data.localidade,
             district: response.data.bairro,
             street: response.data.logradouro
+            
         }
 
         return address

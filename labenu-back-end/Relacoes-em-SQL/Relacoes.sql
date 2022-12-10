@@ -23,6 +23,7 @@ CREATE TABLE Contas (
     password VARCHAR(30)  NOT NULL,  
     id_cliente VARCHAR(100) UNIQUE NOT NULL,   -- PRECISA SER IGUAL AO ID DA TABLE Clientes
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id)  
+    
 );
 
 
