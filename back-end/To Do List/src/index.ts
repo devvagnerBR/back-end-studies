@@ -5,6 +5,7 @@ import { getUserById } from './endpoints/getUserByID';
 import { editUser } from './endpoints/editUser';
 import { createTask } from './endpoints/createTask';
 import { getTaskById } from './endpoints/getTaskByID';
+import { getAllUsers } from './endpoints/getAllUsers';
 
 
 const app = express();
@@ -26,8 +27,8 @@ app.post( "/task", createTask )
 // Get Task by ID
 app.get( "/task/:id", getTaskById )
 
-
-
+// Get All users
+app.get( "/users/all", getAllUsers )
 
 
 
