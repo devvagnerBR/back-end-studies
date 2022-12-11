@@ -1,15 +1,18 @@
 {
+    "name": "labecommerce",
     "version": 2,
+    "public": true,
+
     "builds": [
         {
-            "src": "./build/index.js",
+            "src": "./src/index.ts",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/"
+            "dest": "/src/index.ts"
         }
     ]
 }
