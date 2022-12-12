@@ -1,14 +1,19 @@
 export class Cachorro {
 
-    nome: string
-    peso: number
-    raca: string
+    private nome: string
+    private peso: number
+    private raca: string
 
+    public getNome(): string {
+        return this.nome
+    }
+
+    public setNome( novoNome: string ) {
+        this.nome = novoNome
+    }
     constructor( peso: number, raca: string, nome?: string, ) {
 
-        // if ( nome ) this.nome = nome
-        // else this.nome = 'sem nome'
-        this.nome = nome || 'sem nome' // se não for passado um nome atribui "sem nome" ao nome.
+        this.nome = nome || 'sem nome' 
         this.peso = peso
         this.raca = raca
 
