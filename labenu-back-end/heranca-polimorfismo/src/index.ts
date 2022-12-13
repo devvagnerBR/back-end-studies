@@ -1,6 +1,7 @@
 
 // import { app } from './app';
 // import { Animal } from './Animal';
+import { CustomError } from './CustomError';
 import { Dog } from './Dog';
 import { Owl } from './Owl';
 
@@ -38,12 +39,18 @@ import { Owl } from './Owl';
 // console.log( amigo.pegarNome(), amigo.work );
 
 
-const coruja = new Owl( "Coruja", 50 )
-console.log( coruja.getName() )
+
+//Exemplo 1--------------------------------------------
+// const coruja = new Owl( "Coruja", 50 )
+// console.log( coruja.getName() )
 
 
-const cachorro = new Dog( "Cachorro", 500 )
-console.log( cachorro.getFood( 300 ) );
+// const cachorro = new Dog( "Cachorro", 500 )
+// console.log( cachorro.getFood( 300 ) );
 
 
-console.log( cachorro.getName() )
+// console.log( cachorro.getName() )
+
+
+const notFound = new CustomError( 404, "Not found" )
+console.log( notFound.statusCode, notFound.message );
