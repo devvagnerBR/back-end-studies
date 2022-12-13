@@ -1,5 +1,10 @@
-export class PessoaDesenvolvedora {
+interface ISA {
+    ISA: boolean
+}
 
+export class PessoaDesenvolvedora implements ISA {
+
+    ISA: boolean = true
     private name: string;
     private salarioBruto: number;
     private dividaProvi: number;
@@ -33,5 +38,5 @@ export class PessoaDesenvolvedora {
     pegarDividaProvi(): number {
         return this.dividaProvi
     }
-    
+
 }
