@@ -4,6 +4,7 @@
 import { CustomError } from './CustomError';
 import { Dog } from './Dog';
 import { Owl } from './Owl';
+import { PessoaDesenvolvedora } from './PessoaDesenvolvedora';
 
 
 // class Mother {
@@ -51,6 +52,17 @@ import { Owl } from './Owl';
 
 // console.log( cachorro.getName() )
 
+//Exemplo 2 ------------------------------------------
+// const notFound = new CustomError( 404, "Not found" )
+// console.log( notFound.statusCode, notFound.message );
 
-const notFound = new CustomError( 404, "Not found" )
-console.log( notFound.statusCode, notFound.message );
+PessoaDesenvolvedora.porcentagemProvi = 0.17
+
+const paulo = new PessoaDesenvolvedora( "Paulo", 3000 )
+console.log( paulo.pegarDividaProvi().toFixed( 2 ) );
+
+const wagner = new PessoaDesenvolvedora( "Wagner", 4500 )
+console.log( wagner.pegarDividaProvi().toFixed( 2 ) );
+
+// wagner.mudarPorcentagemProvi( 0.17 )
+// console.log( wagner.pegarDividaProvi() );
