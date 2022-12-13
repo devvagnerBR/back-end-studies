@@ -5,6 +5,7 @@ import { CustomError } from './CustomError';
 import { Dog } from './Dog';
 import { Owl } from './Owl';
 import { PessoaDesenvolvedora } from './PessoaDesenvolvedora';
+import { ISA } from './PessoaDesenvolvedora';
 
 
 // class Mother {

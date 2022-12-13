@@ -1,5 +1,6 @@
-interface ISA {
+export interface ISA {
     ISA: boolean
+    falar(): string
 }
 
 export class PessoaDesenvolvedora implements ISA {
@@ -18,24 +19,28 @@ export class PessoaDesenvolvedora implements ISA {
 
     }
 
-    pegarSalario() {
+    public falar(): string {
+        return "Bom dia"
+    }
+
+    public pegarSalario() {
         return this.salarioBruto;
     }
 
-    mudarSalario( novoSalario: number ): void {
+    public mudarSalario( novoSalario: number ): void {
         this.salarioBruto = novoSalario;
     }
 
-    mudarPorcentagemProvi( novaPorcentagem: number ): void {
+    public mudarPorcentagemProvi( novaPorcentagem: number ): void {
         PessoaDesenvolvedora.porcentagemProvi = novaPorcentagem;
         this.dividaProvi = this.salarioBruto * novaPorcentagem
     }
 
-    pegarNome() {
+    public pegarNome() {
         return this.name
     }
 
-    pegarDividaProvi(): number {
+    public pegarDividaProvi(): number {
         return this.dividaProvi
     }
 
