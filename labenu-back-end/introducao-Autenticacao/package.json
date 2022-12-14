@@ -5,8 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/index.js",
+    "startF":"tsc && node --inspect ./build/index.js",
     "build": "tsc",
     "dev": "tsnd src/index.ts",
+    "devF" : "ts-node-dev ./src/index.ts",
     "migrations": "tsc && node ./build/database/migrations.js"
   },
   "keywords": [],

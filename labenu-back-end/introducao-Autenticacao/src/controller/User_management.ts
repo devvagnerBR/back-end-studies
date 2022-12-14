@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import connection from '../database/connection';
 import { TABLE_USERS } from '../database/tableNames';
 import { USER } from './../models/User';
+import { authenticationData } from '../services/Authenticator';
+
 
 
 
@@ -11,19 +13,15 @@ dotenv.config()
 export class USER_MANAGEMENT {
 
     public async createUser( user: USER ) {
-
         try {
             return await connection( TABLE_USERS ).insert( user )
-
         } catch ( error: any ) {
             throw new Error( error.sqlMessage || error.message )
         }
     }
 
     public async getAllUsers() {
-
         try {
-
             return await connection( TABLE_USERS ).select()
 
 
@@ -33,15 +31,12 @@ export class USER_MANAGEMENT {
     }
 
     public async getUserById( id: string ) {
-
         return await connection( TABLE_USERS ).select()
             .where( "id", "=", `${id}` )
     }
 
     public async editUser( id: string, user: { name: string, nickname: string, email: string } ) {
-
         try {
-
             return await connection( TABLE_USERS )
                 .update( user )
                 .where( { id: id } )
@@ -53,10 +48,23 @@ export class USER_MANAGEMENT {
 
     public async deleteUser( id: string ) {
         try {
-
             return await connection( TABLE_USERS )
                 .where( "id", "=", `${id}` )
                 .delete()
+        } catch ( error: any ) {
+            throw new Error( error.sqlMessage || error.message )
+        }
+    }
+
+
+    public async login( email: string ) {
+
+        try {
+
+            return await connection( TABLE_USERS )
+                .select()
+                .where( { email: email } )
+
 
         } catch ( error: any ) {
             throw new Error( error.sqlMessage || error.message )

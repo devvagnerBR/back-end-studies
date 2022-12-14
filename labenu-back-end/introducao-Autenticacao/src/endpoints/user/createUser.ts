@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { USER } from './../../models/User';
 import { USER_MANAGEMENT } from './../../controller/User_management';
+import { authenticationData, Authenticator } from '../../services/Authenticator';
 
-export const createUser = async ( req: Request, res: Response ) => {
+export const createUser = async ( req: Request, res: Response ): Promise<void> => {
 
     try {
 
@@ -11,7 +12,12 @@ export const createUser = async ( req: Request, res: Response ) => {
         const db = new USER_MANAGEMENT()
 
         await db.createUser( user )
-        res.status( 200 ).send( { message: `Usuário criado com sucesso` } )
+
+        const authenticator: Authenticator = new Authenticator()
+        const payload: authenticationData = { id: user.getId() }
+
+        const token = authenticator.GenerateToken( payload )
+        res.status( 200 ).send( { message: `Usuário criado com sucesso`, data: token } )
 
     } catch ( error: any ) {
         throw new Error( error.sqlMessage || error.message )

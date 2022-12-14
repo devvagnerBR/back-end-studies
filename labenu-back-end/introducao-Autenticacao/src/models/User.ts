@@ -12,4 +12,7 @@ export class USER {
         this.id = uuid()
     }
 
+    public getId() {
+        return this.id
+    }
 }
