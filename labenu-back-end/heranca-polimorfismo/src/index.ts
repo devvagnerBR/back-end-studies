@@ -56,7 +56,7 @@ import { ISA } from './PessoaDesenvolvedora';
 //Exemplo 2 ------------------------------------------
 // const notFound = new CustomError( 404, "Not found" )
 // console.log( notFound.statusCode, notFound.message );
-
+    
 PessoaDesenvolvedora.porcentagemProvi = 0.17
 
 const paulo = new PessoaDesenvolvedora( "Paulo", 3000 )
