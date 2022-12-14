@@ -10,20 +10,20 @@ const createTable = async () => {
                              ${TABLE_TASKS};
                              
         CREATE TABLE ${TABLE_USERS}(
-            user_id VARCHAR(255) PRIMARY KEY,
-            user_name VARCHAR(255) NULL,
-            user_nickname VARCHAR(255) UNIQUE NOT NULL,
-            user_email VARCHAR(255) UNIQUE NOT NULL
+            id VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255) NULL,
+            nickname VARCHAR(255) UNIQUE NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL
         );
 
         CREATE TABLE ${TABLE_TASKS}(
-            task_id VARCHAR(255) PRIMARY KEY,
-            task_name VARCHAR(255) NOT NULL UNIQUE,
-            task_description TEXT NOT NULL,
-            task_created_at DATE NOT NULL,
-            task_status VARCHAR(255) NOT NULL DEFAULT "false",
-            task_user_id VARCHAR(255) NOT NULL,
-            FOREIGN KEY (task_user_id) REFERENCES ${TABLE_USERS}(user_id)
+            id VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255) NOT NULL UNIQUE,
+            description VARCHAR(255)  NOT NULL,
+            created_at DATE NOT NULL,
+            status VARCHAR(255) NOT NULL DEFAULT "false",
+            user_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES ${TABLE_USERS}(id)
         );
 
 

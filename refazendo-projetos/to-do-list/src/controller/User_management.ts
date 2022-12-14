@@ -32,19 +32,31 @@ export class USER_MANAGEMENT {
         }
     }
 
-    public async getUserById( user_id: string ) {
+    public async getUserById( id: string ) {
 
         return await connection( TABLE_USERS ).select()
-            .where( "user_id", "=", `${user_id}` )
+            .where( "id", "=", `${id}` )
     }
 
-    public async editUser( user_id: string, user: { user_name: string, user_nickname: string, user_email: string } ) {
+    public async editUser( id: string, user: { name: string, nickname: string, email: string } ) {
 
         try {
 
             return await connection( TABLE_USERS )
                 .update( user )
-                .where( { user_id: user_id } )
+                .where( { id: id } )
+
+        } catch ( error: any ) {
+            throw new Error( error.sqlMessage || error.message )
+        }
+    }
+
+    public async deleteUser( id: string ) {
+        try {
+
+            return await connection( TABLE_USERS )
+                .where( "id", "=", `${id}` )
+                .delete()
 
         } catch ( error: any ) {
             throw new Error( error.sqlMessage || error.message )

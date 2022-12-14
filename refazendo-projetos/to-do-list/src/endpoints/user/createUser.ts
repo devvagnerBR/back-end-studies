@@ -6,8 +6,8 @@ export const createUser = async ( req: Request, res: Response ) => {
 
     try {
 
-        const { user_name, user_nickname, user_email } = req.body
-        const user = new USER( user_name, user_nickname, user_email )
+        const { name, nickname, email } = req.body
+        const user = new USER( name, nickname, email )
         const db = new USER_MANAGEMENT()
 
         await db.createUser( user )
