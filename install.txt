@@ -1,7 +1,10 @@
 npm init -y
 npm install 
-npm install knex mysql typescript express dotenv cors ts--D
-npm install --save-dev @types/knex @types/mysql @types/express @types/cors @types/node @types/jsonwebtoken
+npm install knex mysql typescript express dotenv cors ts-node-dev nodemailer uuid -D 
+npm install --save-dev @types/knex @types/mysql @types/express @types/cors @types/node @types/nodemailer @types/uuid
+npm install nodemailer -D
+npm install @types/nodemailer -D
+npx tsc --init
 
 npx tsc --init
 
@@ -63,8 +66,9 @@ export default connection
 
 DB_HOST = localhost
 DB_USER = root
-DB_PASSWORD = dbd@1130KEKW
+DB_PASSWORD = scotow21
 DB_DATABASE = labenu__
+JWT_KEY = dbd@1130KEKW
 
 // JWTOKEN
 -------------------------------
@@ -98,3 +102,5 @@ export class Authenticator {
         const token = authenticator.GenerateToken( payload )
 
 -----------------------------------------------------
+    "devF" : "ts-node-dev ./src/index.ts",
+    "startF":"tsc && node --inspect ./build/index.js",
