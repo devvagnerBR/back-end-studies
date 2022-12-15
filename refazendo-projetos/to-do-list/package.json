@@ -6,8 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/index.js",
     "build": "tsc",
-    "dev": "tsnd src/index.ts",
-    "migrations": "tsc && node ./build/database/migrations.js"
+    "dev": "tsnd src/index.ts"
   },
   "keywords": [],
   "author": "wagner-guimaraes",
