@@ -10,8 +10,8 @@ A arquitetura impacta o software em [4-pontos-principais]
 # arquitetura MVC | mais usado
 
    requisição-------Resposta
-        Controller - aprensentação | recebe as requisições e mandam as requisições;
-        Bussiness -  regras de negocios;
+        Controller - apresentação | recebe as requisições e mandam as requisições;
+        Business -  regras de negócios;
         Data -  comunica com o banco de dados | envia | recebe requisições de banco de dados ;
 
 ----- Camadas Principais -----

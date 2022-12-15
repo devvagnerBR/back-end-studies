@@ -1,5 +1,9 @@
 import { app } from "./app"
-import { UserController } from './controller/UserController';
+import { taskRouter } from "./routes/taskRouter";
+import { userRouter } from './routes/userRouter';
 
-const userController = new UserController()
-app.post( '/user', userController.createUser );
+
+app.use( "/user", userRouter );
+app.use( "/task", taskRouter );
+
+

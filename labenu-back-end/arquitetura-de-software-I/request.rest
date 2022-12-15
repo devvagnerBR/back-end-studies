@@ -1,4 +1,4 @@
-POST http://localhost:3003/user
+POST http://localhost:3003/user/create
 Content-Type: application/json
 
 {
@@ -6,4 +6,15 @@ Content-Type: application/json
     "email": "cassisrxx@gmail.com",
     "nickname": "cassiesrxx",
     "password": "senha123"
+}
+
+
+POST http://localhost:3003/task
+Content-Type: application/json
+
+{
+    "title" : "ir no mercado", 
+    "description" : "comprar comida pra janta",
+    "deadline" : "15/10",
+    "authorId": "1671128229825"
 }
