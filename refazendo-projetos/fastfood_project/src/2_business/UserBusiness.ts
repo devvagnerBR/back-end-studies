@@ -1,30 +1,34 @@
-
-import { UserDatabase } from '../3_data/UserDatabase';
+import { USER_DTO } from './../models/UserDTO';
+import { UserModel } from './../models/UserModel';
+import { UserDatabase } from './../3_data/UserDatabase';
+import { USER } from './../models/User';
 import { InvalidRequest } from '../error/InvalidRequest';
-import { UserModel } from '../models/UserModel';
-import { USER_DTO } from '../models/UserDTO';
-import { BaseDatabase } from '../3_data/BaseDatabase';
+import { InvalidEmail } from './../error/InvalidEmail';
+import { ShortPassword } from './../error/ShortPassword';
+import { CustomError } from './../error/CustomError';
 
 
 export class UserBusiness {
 
-
-    public async createUser( input: USER_DTO ) {
+    public async createUser( user: USER_DTO ) {
 
         try {
 
-            const { name, email, password } = input;
+            const { name, email, password } = user;
+
             if ( !name || !email || !password ) throw new InvalidRequest();
+            if ( !email.includes( '@' ) ) throw new InvalidEmail();
+            if ( password.length < 3 ) throw new ShortPassword();
 
-            const user = new UserModel( name, email, password )
+            const newUser: USER = new UserModel( name, email, password )
             const userDatabase = new UserDatabase()
-
-            await userDatabase.insertUser( user )
+            await userDatabase.insertUser( newUser )
 
         } catch ( error: any ) {
-            throw new Error( error.message || error.sqlMessage )
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
         }
     }
 
+    
 
 }
