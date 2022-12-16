@@ -1,20 +1,23 @@
-import { v4 as ID } from 'uuid'
+import { generateId } from '../4_services/generateId';
 import { TaskDatabase } from './../3_data/TaskDatabase';
+import { TaskInputDTO } from './../5_model/taskDTO';
+import { CustomError } from './../6_error/CustomError';
+import { InvalidRequest } from './../6_error/InvalidRequest';
 
 export class TaskBusiness {
 
-    public createTask = async ( input: any ) => {
+    public createTask = async ( input: TaskInputDTO ) => {
 
         try {
 
             const { title, description, deadline, authorId } = input;
-            if ( !title || !description || !deadline || !authorId ) throw new Error( `Preencha os campos!` );
+            if ( !title || !description || !deadline || !authorId ) throw new InvalidRequest();
 
             const taskDatabase = new TaskDatabase();
-            await taskDatabase.insertTask( { id:ID(), title, description, deadline, authorId } );
+            await taskDatabase.insertTask( { id: generateId(), title, description, deadline, authorId } );
 
         } catch ( error: any ) {
-            throw new Error( error.message )
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
         };
 
     };

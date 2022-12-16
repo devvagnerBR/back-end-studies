@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from '../2_business/UserBusiness';
+import { UserInputDTO } from './../5_model/userDTO';
 
 export class UserController {
 
@@ -12,7 +13,7 @@ export class UserController {
 
       try {
          const { name, nickname, email, password } = req.body
-         const input = { name, nickname, email, password }
+         const input: UserInputDTO = { name, nickname, email, password }
 
          const userBusiness = new UserBusiness()
          await userBusiness.createUser( input )
@@ -20,7 +21,7 @@ export class UserController {
          res.status( 201 ).send( { message: "Usuário criado!" } )
 
       } catch ( error: any ) {
-         res.status( 400 ).send( error.message )
+         res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
       }
    }
 

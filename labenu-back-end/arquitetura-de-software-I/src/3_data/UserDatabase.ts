@@ -1,4 +1,4 @@
-import { user } from "../types/user";
+import { user } from "../5_model/user";
 import { BaseDatabase } from "./BaseDatabase";
 
 

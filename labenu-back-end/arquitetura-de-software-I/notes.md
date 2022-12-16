@@ -40,8 +40,17 @@ A arquitetura impacta o software em [4-pontos-principais]
 
 [CONTROLLER]
         -recebe requisições e envia respostas no nosso caso, a implementação dos endpoints do [express] fica aqui;
+
 [BUSINESS]
         -cuida das regras de negócio, validações e dependências;
+
 [DATA]
         -Responsável pela implementação do banco de dados;
-        -Implementação do Knex fica aqui
+        -Implementação do Knex fica aqui;
+
+[SERVICES]
+        -guarda códigos externos Ex: Autenticação;
+
+[MODEL]
+        -types | classes | DTO - Objeto de transferência de dados;
+        [DTO] podem ser: TYPES, CLASSES OU INTERFACES;
