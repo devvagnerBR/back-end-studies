@@ -25,7 +25,7 @@ export class UserController {
     public async getUsers( req: Request, res: Response ) {
 
         try {
-            
+
             const userDatabase = new UserDatabase()
             const result = await userDatabase.getUsers()
 

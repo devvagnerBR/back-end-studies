@@ -6,6 +6,7 @@ import { InvalidRequest } from '../error/InvalidRequest';
 import { InvalidEmail } from './../error/InvalidEmail';
 import { ShortPassword } from './../error/ShortPassword';
 import { CustomError } from './../error/CustomError';
+import { EmptyUsers } from './../error/EmptyUsers';
 
 
 export class UserBusiness {
@@ -29,6 +30,5 @@ export class UserBusiness {
         }
     }
 
-    
 
 }
