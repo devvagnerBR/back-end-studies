@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { USER_DTO } from './../models/UserDTO';
-import { UserBusiness } from './../2_business/UserBusiness';
-import { UserDatabase } from './../3_data/UserDatabase';
+import { UserBusiness } from './../business/UserBusiness';
+import { UserDatabase } from './../data/UserDatabase';
 import { USER } from "../models/User";
 
 export class UserController {
@@ -73,6 +73,26 @@ export class UserController {
 
         } catch ( error: any ) {
             res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+        }
+    }
+
+
+    public async deleteUser( req: Request, res: Response ) {
+
+
+
+        try {
+
+            const { id } = req.params
+            const userBusiness = new UserBusiness()
+            userBusiness.deleteUser( id )
+
+            res.status( 200 ).send( 'usuário deletado com sucesso!' )
+            
+        } catch ( error: any ) {
+
+            res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+
         }
     }
 }

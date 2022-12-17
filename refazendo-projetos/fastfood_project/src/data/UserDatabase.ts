@@ -70,4 +70,19 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
+    public async deleteUser( id: string ) {
+
+        try {
+
+            await UserDatabase.connection( this.TABLE_USERS )
+                .where( { id: id } )
+                .delete()
+
+        } catch ( error: any ) {
+
+            throw new Error( error.message )
+
+        }
+    }
+
 }

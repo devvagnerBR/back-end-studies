@@ -1,6 +1,6 @@
 import { USER_DTO } from './../models/UserDTO';
 import { UserModel } from './../models/UserModel';
-import { UserDatabase } from './../3_data/UserDatabase';
+import { UserDatabase } from './../data/UserDatabase';
 import { USER } from './../models/User';
 import { InvalidRequest } from '../error/InvalidRequest';
 import { InvalidEmail } from './../error/InvalidEmail';
@@ -38,7 +38,9 @@ export class UserBusiness {
 
         try {
 
+
             if ( !id ) throw new InvalidRequest();
+
             const userDatabase = new UserDatabase();
             return await userDatabase.getUserById( id );
 
@@ -56,14 +58,14 @@ export class UserBusiness {
 
             const { id, name, email, password } = body;
 
-
             const userDatabase = new UserDatabase();
             const [user] = await userDatabase.getUserById( id );
 
             if ( !name || !email || password ) throw new InvalidRequest()
             if ( !id ) throw new InvalidRequest();
             if ( ![user] ) throw new UserNotFound();
-            
+
+
             const update: USER = {
 
                 id: user.id,
@@ -74,6 +76,20 @@ export class UserBusiness {
             };
 
             await userDatabase.editUser( update )
+
+        } catch ( error: any ) {
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
+        }
+    }
+
+
+    public async deleteUser( id: string ) {
+
+        try {
+
+            if ( !id ) throw new InvalidRequest();
+            const userDatabase = new UserDatabase()
+            await userDatabase.deleteUser( id );
 
         } catch ( error: any ) {
             throw new CustomError( error.statusCode, error.message || error.sqlMessage )

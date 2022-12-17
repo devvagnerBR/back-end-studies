@@ -1,6 +1,5 @@
-import { app } from "./1_controller/app"
-import { userRouter } from './1_controller/routes/userRouter';
-
+import { app } from "./controller/app"
+import { userRouter } from './routes/userRouter';
 
 
 app.use( "/user", userRouter );
