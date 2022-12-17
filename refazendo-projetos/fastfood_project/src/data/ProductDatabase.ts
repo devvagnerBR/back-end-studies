@@ -26,13 +26,32 @@ export class ProductDatabase extends BaseDatabase {
 
         try {
 
-           return await ProductDatabase
+            return await ProductDatabase
                 .connection( this.TABLE_PRODUCTS )
                 .select()
 
         } catch ( error: any ) {
             throw new Error( error.message )
         }
+
+    }
+
+
+    public async getProductByName( name: string ) {
+
+        try {
+
+            return await ProductDatabase
+                .connection( this.TABLE_PRODUCTS )
+                .select()
+                .where( "name", "LIKE", `%${name}%` )
+
+        } catch ( error: any ) {
+
+            throw new Error( error.message )
+
+        }
+
 
     }
 

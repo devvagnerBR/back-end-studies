@@ -31,10 +31,27 @@ export class ProductController {
             const productBusiness = new ProductBusiness()
             const result = await productBusiness.getAllProducts()
 
-            res.status( 200 ).send( result  )
+            res.status( 200 ).send( result )
 
         } catch ( error: any ) {
             res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
         }
+    }
+
+    public async getProductByName( req: Request, res: Response ) {
+
+        try {
+
+            const name = req.query.name as string;
+
+            const productBusiness = new ProductBusiness();
+            const result = await productBusiness.getProductByName( name );
+
+            res.status( 200 ).send( result );
+
+        } catch ( error: any ) {
+            res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+        }
+
     }
 }

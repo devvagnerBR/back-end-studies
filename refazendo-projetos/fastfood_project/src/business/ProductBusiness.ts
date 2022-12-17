@@ -6,6 +6,7 @@ import { ShortName } from './../error/ShortName';
 import { ProductModel } from "../models/product/ProductModel";
 import { ProductDatabase } from './../data/ProductDatabase';
 import { CustomError } from './../error/CustomError';
+import { ProductNotFound } from './../error/ProductNotFound';
 
 
 export class ProductBusiness {
@@ -39,13 +40,37 @@ export class ProductBusiness {
 
         try {
 
-            const productDatabase = new ProductDatabase()
-            return await productDatabase.GetAllProducts()
+            const productDatabase = new ProductDatabase();
+            return await productDatabase.GetAllProducts();
 
         } catch ( error: any ) {
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage );
+        }
+
+    }
+
+    public async getProductByName( name: string ) {
+
+        try {
+
+            
+            if ( !name ) name = "%";
+            
+            const productDatabase = new ProductDatabase();
+            const result = await productDatabase.getProductByName( name );
+            if ( !result ) throw new ProductNotFound();
+
+
+            return result;
+
+
+        } catch ( error: any ) {
+
             throw new CustomError( error.statusCode, error.message || error.sqlMessage )
+
         }
 
 
     }
+
 }
