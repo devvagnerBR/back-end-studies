@@ -1,13 +1,12 @@
-import { USER_DTO } from './../models/UserDTO';
-import { UserModel } from './../models/UserModel';
+import { UserModel } from '../models/user/UserModel';
 import { UserDatabase } from './../data/UserDatabase';
-import { USER } from './../models/User';
 import { InvalidRequest } from '../error/InvalidRequest';
 import { InvalidEmail } from './../error/InvalidEmail';
 import { ShortPassword } from './../error/ShortPassword';
 import { CustomError } from './../error/CustomError';
-import { EmptyUsers } from './../error/EmptyUsers';
 import { UserNotFound } from './../error/UserNotFound';
+import { USER } from './../models/user/User';
+import { USER_DTO } from './../models/user/UserDTO';
 
 
 export class UserBusiness {

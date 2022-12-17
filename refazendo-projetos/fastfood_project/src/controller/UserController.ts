@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { USER_DTO } from './../models/UserDTO';
+
 import { UserBusiness } from './../business/UserBusiness';
 import { UserDatabase } from './../data/UserDatabase';
-import { USER } from "../models/User";
+import { USER_DTO } from './../models/user/UserDTO';
+
 
 export class UserController {
 

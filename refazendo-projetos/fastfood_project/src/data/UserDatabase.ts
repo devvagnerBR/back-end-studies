@@ -1,6 +1,7 @@
 import { BaseDatabase } from './BaseDatabase';
-import { USER } from './../models/User';
-import { USER_DTO } from './../models/UserDTO';
+
+import { USER_DTO } from './../models/user/UserDTO';
+import { USER } from '../models/user/User';
 
 
 

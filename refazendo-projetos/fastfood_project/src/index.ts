@@ -1,7 +1,7 @@
 import { app } from "./controller/app"
+import { productRouter } from "./routes/productRouter";
 import { userRouter } from './routes/userRouter';
 
 
 app.use( "/user", userRouter );
-// app.use( "/product" );
-// app.use( "/purchases" );
+app.use( '/product', productRouter );
