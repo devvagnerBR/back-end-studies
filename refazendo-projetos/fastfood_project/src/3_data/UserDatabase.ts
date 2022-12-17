@@ -11,7 +11,7 @@ export class UserDatabase extends BaseDatabase {
 
         try {
 
-            await UserDatabase.connection.insert( user )
+        await UserDatabase.connection.insert( user )
                 .into( this.TABLE_USERS )
 
 
@@ -32,6 +32,21 @@ export class UserDatabase extends BaseDatabase {
             throw new Error( error.message )
         }
 
+    }
+
+
+    public async getUserById( id: string ) {
+
+        try {
+
+            return await UserDatabase
+                .connection( this.TABLE_USERS )
+                .select()
+                .where( "id", "=", `${id}` )
+
+        } catch ( error: any ) {
+            throw new Error( error.message )
+        }
     }
 
 }

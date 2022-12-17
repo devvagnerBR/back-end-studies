@@ -31,4 +31,19 @@ export class UserBusiness {
     }
 
 
+
+    public async getUserById( id: string ) {
+
+        try {
+
+            if ( !id ) throw new InvalidRequest();
+            const userDatabase = new UserDatabase();
+            return await userDatabase.getUserById( id );
+
+
+        } catch ( error: any ) {
+
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
+        }
+    }
 }

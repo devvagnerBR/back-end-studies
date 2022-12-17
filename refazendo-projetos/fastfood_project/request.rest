@@ -1,0 +1,24 @@
+POST http://localhost:3003/user/create 
+Content-Type: application/json 
+
+{
+    "name": "Rodrigo12",
+    "nickname": "Rodrigo12",
+    "email": "rodrigo12@email.com",
+    "password": "1223145153"
+}
+
+###
+POST http://localhost:3003/task/create 
+Content-Type: application/json 
+
+{
+    "title": "aula arquitetura II",
+    "description": "como usar o express.router()",
+    "deadline": "26/05/2022",
+    "authorId": "1b146f8d-7709-4a84-8c3c-7f980e8d4da3" 
+}
+
+
+### Search users by id
+GET http://localhost:3003/user/80901e3a-b985-4ae8-b93d-26f722986cce
