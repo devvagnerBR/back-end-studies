@@ -23,4 +23,18 @@ export class ProductController {
             res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
         }
     }
+
+    public async getAllProducts( req: Request, res: Response ) {
+
+        try {
+
+            const productBusiness = new ProductBusiness()
+            const result = await productBusiness.getAllProducts()
+
+            res.status( 200 ).send( result  )
+
+        } catch ( error: any ) {
+            res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+        }
+    }
 }

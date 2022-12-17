@@ -8,3 +8,4 @@ const productController = new ProductController();
 
 
 productRouter.post( '/', productController.createProduct )
+productRouter.get( '/', productController.getAllProducts )

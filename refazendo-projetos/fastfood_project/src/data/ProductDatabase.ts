@@ -8,10 +8,10 @@ export class ProductDatabase extends BaseDatabase {
 
     public async insertProduct( product: ProductModel ) {
 
-
         try {
 
-             await ProductDatabase.connection
+            await ProductDatabase.connection
+
                 .insert( product )
                 .into( this.TABLE_PRODUCTS )
 
@@ -20,8 +20,20 @@ export class ProductDatabase extends BaseDatabase {
             throw new Error( error.message )
 
         }
+    }
 
+    public async GetAllProducts() {
 
+        try {
+
+           return await ProductDatabase
+                .connection( this.TABLE_PRODUCTS )
+                .select()
+
+        } catch ( error: any ) {
+            throw new Error( error.message )
+        }
 
     }
+
 }

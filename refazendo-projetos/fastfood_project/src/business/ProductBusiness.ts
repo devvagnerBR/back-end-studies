@@ -34,4 +34,18 @@ export class ProductBusiness {
 
     }
 
+    public async getAllProducts() {
+
+
+        try {
+
+            const productDatabase = new ProductDatabase()
+            return await productDatabase.GetAllProducts()
+
+        } catch ( error: any ) {
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
+        }
+
+
+    }
 }
