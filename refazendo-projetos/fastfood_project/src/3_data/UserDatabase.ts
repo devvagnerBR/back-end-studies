@@ -1,5 +1,6 @@
 import { BaseDatabase } from './BaseDatabase';
 import { USER } from './../models/User';
+import { USER_DTO } from './../models/UserDTO';
 
 
 
@@ -11,7 +12,7 @@ export class UserDatabase extends BaseDatabase {
 
         try {
 
-        await UserDatabase.connection.insert( user )
+            await UserDatabase.connection.insert( user )
                 .into( this.TABLE_USERS )
 
 
@@ -46,6 +47,26 @@ export class UserDatabase extends BaseDatabase {
 
         } catch ( error: any ) {
             throw new Error( error.message )
+        }
+    }
+
+
+    public async editUser( update: USER ) {
+
+        try {
+
+            const { id } = update;
+            const { name, email, password }: USER_DTO = update;
+
+            return await UserDatabase
+                .connection( this.TABLE_USERS )
+                .update( { name, email, password } )
+                .where( { id: id } )
+
+        } catch ( error: any ) {
+
+            throw new Error( error.message )
+
         }
     }
 

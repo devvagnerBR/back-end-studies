@@ -40,21 +40,24 @@ export class UserController {
 
     }
 
-    // public async editUser( req: Request, res: Response ) {
+    public async editUser( req: Request, res: Response ) {
 
-    //     try {
+        try {
 
-    //         const { id } = req.params
-    //         const { name, email, password } = req.body
-    //         const userBusiness = new UserBusiness()
-    //         const update: USER = { id, name, email, password }
+            const { id } = req.params;
+            const { name, email, password } = req.body;
+            const update: USER_DTO = { name, email, password }
 
-    //         await userBusiness.getUserById( update )
+            const userBusiness = new UserBusiness()
+            await userBusiness.editUser( { id, ...update } )
 
-    //     } catch ( error: any ) {
-    //         res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
-    //     }
-    // }
+
+            res.status( 200 ).send( { message: 'usuário atualizado com sucesso' } )
+
+        } catch ( error: any ) {
+            res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+        }
+    }
 
 
     public async getUserById( req: Request, res: Response ) {
