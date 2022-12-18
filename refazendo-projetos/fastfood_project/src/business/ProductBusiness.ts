@@ -7,6 +7,7 @@ import { ProductModel } from "../models/product/ProductModel";
 import { ProductDatabase } from './../data/ProductDatabase';
 import { CustomError } from './../error/CustomError';
 import { ProductNotFound } from './../error/ProductNotFound';
+import { InvalidId } from './../error/InvalidID copy';
 
 
 export class ProductBusiness {
@@ -49,15 +50,15 @@ export class ProductBusiness {
 
     }
 
-    public async getProductByName( name: string ) {
+    public async getProductByNameOrId( name: string ) {
 
         try {
 
-            
+
             if ( !name ) name = "%";
-            
+
             const productDatabase = new ProductDatabase();
-            const result = await productDatabase.getProductByName( name );
+            const result = await productDatabase.getProductByNameOrId( name );
             if ( !result ) throw new ProductNotFound();
 
 
@@ -73,4 +74,26 @@ export class ProductBusiness {
 
     }
 
+
+    public async deleteUser( id: string ) {
+
+        try {
+
+            if ( !id ) throw new InvalidRequest();
+            if ( id.length < 36 ) throw new InvalidId();
+
+            const productDatabase = new ProductDatabase();
+            const findUser = await productDatabase.getProductByNameOrId( id );
+
+            if ( !findUser ) throw new ProductNotFound();
+
+            await productDatabase.deleteProduct( id );
+
+        } catch ( error: any ) {
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
+        }
+
+
+
+    }
 }

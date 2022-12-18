@@ -9,14 +9,11 @@ export class ProductDatabase extends BaseDatabase {
     public async insertProduct( product: ProductModel ) {
 
         try {
-
             await ProductDatabase.connection
-
                 .insert( product )
                 .into( this.TABLE_PRODUCTS )
 
         } catch ( error: any ) {
-
             throw new Error( error.message )
 
         }
@@ -37,22 +34,34 @@ export class ProductDatabase extends BaseDatabase {
     }
 
 
-    public async getProductByName( name: string ) {
+    public async getProductByNameOrId( name: string ) {
 
         try {
-
             return await ProductDatabase
                 .connection( this.TABLE_PRODUCTS )
                 .select()
                 .where( "name", "LIKE", `%${name}%` )
+                .orWhere( "id", '=', `${name}` )
 
         } catch ( error: any ) {
-
             throw new Error( error.message )
 
         }
 
 
+    }
+
+    public async deleteProduct( id: string ) {
+
+        try {
+            await ProductDatabase
+                .connection( this.TABLE_PRODUCTS )
+                .where( { id: id } )
+                .delete()
+
+        } catch ( error: any ) {
+            throw new Error( error.message )
+        }
     }
 
 }

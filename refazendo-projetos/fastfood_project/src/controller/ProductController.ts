@@ -42,10 +42,10 @@ export class ProductController {
 
         try {
 
-            const name = req.query.name as string;
+            const q = req.query.q as string;
 
             const productBusiness = new ProductBusiness();
-            const result = await productBusiness.getProductByName( name );
+            const result = await productBusiness.getProductByNameOrId( q );
 
             res.status( 200 ).send( result );
 
@@ -53,5 +53,20 @@ export class ProductController {
             res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
         }
 
+    }
+
+    public async deleteProduct( req: Request, res: Response ) {
+
+        try {
+
+            const { id } = req.params
+            const productBusiness = new ProductBusiness();
+            await productBusiness.deleteUser( id );
+
+            res.status( 200 ).send( `Usuário deletado com sucesso` )
+
+        } catch ( error: any ) {
+            res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+        }
     }
 }

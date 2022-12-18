@@ -10,3 +10,4 @@ const productController = new ProductController();
 productRouter.post( '/', productController.createProduct )
 productRouter.get( '/', productController.getProductByName )
 productRouter.get( '/', productController.getAllProducts )
+productRouter.delete( '/:id', productController.deleteProduct )
