@@ -8,6 +8,7 @@ import { ProductDatabase } from './../data/ProductDatabase';
 import { CustomError } from './../error/CustomError';
 import { ProductNotFound } from './../error/ProductNotFound';
 import { InvalidId } from './../error/InvalidID copy';
+import { UserNotFound } from './../error/UserNotFound';
 
 
 export class ProductBusiness {
@@ -92,8 +93,35 @@ export class ProductBusiness {
         } catch ( error: any ) {
             throw new CustomError( error.statusCode, error.message || error.sqlMessage )
         }
+    }
+
+    public async editUser( body: ProductModel ) {
+
+        try {
+
+            const { id, name, price, image_url } = body;
+
+            const productDatabase = new ProductDatabase();
+            const [product] = await productDatabase.getProductByNameOrId( id );
+
+            if ( !name && !price && !image_url ) throw new InvalidRequest();
+            if ( !id ) throw new InvalidRequest();
+            if ( ![product] ) throw new ProductNotFound();
 
 
+            const update: ProductModel = {
 
+                id: product.id,
+                name: name || product.name,
+                price: price || product.price,
+                image_url: image_url || product.image_url
+
+            };
+
+            await productDatabase.editProduct( update )
+
+        } catch ( error: any ) {
+            throw new CustomError( error.statusCode, error.message || error.sqlMessage )
+        }
     }
 }

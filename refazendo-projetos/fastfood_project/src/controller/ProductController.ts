@@ -69,4 +69,22 @@ export class ProductController {
             res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
         }
     }
+
+    public async editUser( req: Request, res: Response ) {
+
+        try {
+
+            const { id } = req.params;
+            const { name, price, image_url }: PRODUCT_DTO = req.body;
+            const update: PRODUCT_DTO = { name, price, image_url };
+
+            const productBusiness = new ProductBusiness();
+            await productBusiness.editUser( { id, ...update } )
+
+            res.status( 200 ).send( `Produto atualizado com sucesso` )
+
+        } catch ( error: any ) {
+            res.status( error.statusCode || 400 ).send( error.message || error.sqlMessage )
+        }
+    }
 }

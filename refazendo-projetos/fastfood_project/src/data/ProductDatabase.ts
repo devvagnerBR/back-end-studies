@@ -64,4 +64,20 @@ export class ProductDatabase extends BaseDatabase {
         }
     }
 
+    public async editProduct( product: ProductModel ) {
+
+
+        try {
+
+            const { id, name, price, image_url }: ProductModel = product;
+
+            await ProductDatabase.connection( this.TABLE_PRODUCTS )
+                .update( { name, price, image_url } )
+                .where( { id: id } )
+
+        } catch ( error: any ) {
+            throw new Error( error.message )
+        }
+    }
+
 }
