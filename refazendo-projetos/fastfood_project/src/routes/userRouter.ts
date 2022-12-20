@@ -10,3 +10,4 @@ userRouter.get( '/', userController.getUsers )
 userRouter.get( '/:id', userController.getUserById )
 userRouter.put( '/:id', userController.editUser )
 userRouter.delete( '/:id', userController.deleteUser )
+
